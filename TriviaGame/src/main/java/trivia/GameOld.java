@@ -85,6 +85,10 @@ public class GameOld implements IGame {
          askQuestion();
       }
 
+      if(isGettingOutOfPenaltyBox){
+         isGettingOutOfPenaltyBox = false;
+         inPenaltyBox[currentPlayer] = false;
+      }
    }
 
    private void askQuestion() {
@@ -115,7 +119,7 @@ public class GameOld implements IGame {
    public boolean handleCorrectAnswer() {
       if (inPenaltyBox[currentPlayer]) {
          if (isGettingOutOfPenaltyBox) {
-            System.out.println("Answer was corrent!!!!");
+            System.out.println("Answer was correct!!!!");
             purses[currentPlayer]++;
             System.out.println(players.get(currentPlayer)
                                + " now has "
@@ -135,7 +139,7 @@ public class GameOld implements IGame {
 
       } else {
 
-         System.out.println("Answer was corrent!!!!");
+         System.out.println("Answer was correct!!!!");
          purses[currentPlayer]++;
          System.out.println(players.get(currentPlayer)
                             + " now has "
