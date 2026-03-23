@@ -3,8 +3,8 @@ package Event;
 import java.time.LocalDateTime;
 
 public class Periodique extends Event {
-    public Periodique(String title, String proprietaire, LocalDateTime dateDebut, int dureeMinutes, String lieu, String participants, int frequenceJours) {
-        super("PERIODIQUE", title, proprietaire, dateDebut, dureeMinutes, lieu, participants, frequenceJours);
+    public Periodique(String title, String proprietaire, LocalDateTime dateDebut, int dureeMinutes, String lieu, int frequenceJours) {
+        super("PERIODIQUE", title, proprietaire, dateDebut, dureeMinutes, lieu, null, frequenceJours);
     }
 
     @Override
