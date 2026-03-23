@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import static org.junit.Assert.assertEquals;
 
+import Event.*;
+
 public class TestEvent {
 
     private final LocalDateTime date = LocalDateTime.of(2024, 6, 15, 10, 30);

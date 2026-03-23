@@ -1,3 +1,5 @@
+package Event;
+
 import java.time.LocalDateTime;
 
 public class Periodique extends Event {
