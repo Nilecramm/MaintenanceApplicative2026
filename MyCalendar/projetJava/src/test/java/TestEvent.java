@@ -10,19 +10,19 @@ public class TestEvent {
 
     @Test
     void description_rdvPersonnel() {
-        Event e = new Event("RDV_PERSONNEL", "Médecin", "Alice", date, 30, null, null, 0);
+        RDVPerso e = new RDVPerso("Médecin", "Alice", date, 30, null, null, 0);
         assertEquals("RDV : Médecin à " + date, e.description());
     }
 
     @Test
     void description_reunion() {
-        Event e = new Event("REUNION", "Sprint Review", "Bob", date, 60, "Salle A", "Alice,Charlie", 0);
+        Reunion e = new Reunion("Sprint Review", "Bob", date, 60, "Salle A", "Alice,Charlie", 0);
         assertEquals("Réunion : Sprint Review à Salle A avec Alice,Charlie", e.description());
     }
 
     @Test
     void description_periodique() {
-        Event e = new Event("PERIODIQUE", "Backup", "System", date, 15, null, null, 7);
+        Periodique e = new Periodique("Backup", "System", date, 15, null, null, 7);
         assertEquals("Événement périodique : Backup tous les 7 jours", e.description());
     }
 
@@ -34,8 +34,8 @@ public class TestEvent {
 
     @Test
     void constructeur_affecteCorrectementLesChamps() {
-        Event e = new Event("REUNION", "Kick-off", "Alice", date, 90, "Salle B", "Bob,Carol", 0);
-        assertEquals("REUNION", e.type);
+        Event e = new Event("INCONNU", "Kick-off", "Alice", date, 90, "Salle B", "Bob,Carol", 0);
+        assertEquals("INCONNU", e.type);
         assertEquals("Kick-off", e.title);
         assertEquals("Alice", e.proprietaire);
         assertEquals(date, e.dateDebut);
