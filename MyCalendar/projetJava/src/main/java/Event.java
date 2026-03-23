@@ -23,14 +23,6 @@ public class Event {
     }
 
     public String description() {
-        String desc = "";
-        if (type.equals("RDV_PERSONNEL")) {
-            desc = "RDV : " + title + " à " + dateDebut.toString();
-        } else if (type.equals("REUNION")) {
-            desc = "Réunion : " + title + " à " + lieu + " avec " + participants;
-        } else if (type.equals("PERIODIQUE")) {
-            desc = "Événement périodique : " + title + " tous les " + frequenceJours + " jours";
-        }
-        return desc;
+        return "";
     }
 }
