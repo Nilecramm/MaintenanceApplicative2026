@@ -1,16 +1,22 @@
 import Event.Rappel;
+import domain.DateEvenement;
 import domain.DureeEvenement;
+import domain.HeureDebut;
 import domain.Proprietaire;
 import domain.TitreEvenement;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestRappel {
 
-    private final LocalDateTime date = LocalDateTime.of(2024, 6, 15, 10, 30);
+    private final LocalDateTime dateTime = LocalDateTime.of(2024, 6, 15, 10, 30);
+    private final DateEvenement date = new DateEvenement(LocalDate.of(2024, 6, 15));
+    private final HeureDebut heure = new HeureDebut(LocalTime.of(10, 30));
     private final Proprietaire alice = new Proprietaire("Alice");
 
     @Test
@@ -19,6 +25,7 @@ class TestRappel {
                 new TitreEvenement("Prendre médicaments"),
                 alice,
                 date,
+                heure,
                 new DureeEvenement(5),
                 15
         );
@@ -31,10 +38,11 @@ class TestRappel {
                 new TitreEvenement("Prendre médicaments"),
                 alice,
                 date,
+                heure,
                 new DureeEvenement(5),
                 10
         );
-        assertTrue(e.estDansPeriode(date.minusHours(1), date.plusHours(1)));
+        assertTrue(e.estDansPeriode(dateTime.minusHours(1), dateTime.plusHours(1)));
     }
 
     @Test
@@ -43,22 +51,23 @@ class TestRappel {
                 new TitreEvenement("Prendre médicaments"),
                 alice,
                 date,
+                heure,
                 new DureeEvenement(5),
                 10
         );
-        assertFalse(e.estDansPeriode(date.plusDays(1), date.plusDays(2)));
+        assertFalse(e.estDansPeriode(dateTime.plusDays(1), dateTime.plusDays(2)));
     }
 
     @Test
     void rappel_aUnIdUnique() {
-        Rappel e1 = new Rappel(new TitreEvenement("A"), alice, date, new DureeEvenement(5), 10);
-        Rappel e2 = new Rappel(new TitreEvenement("A"), alice, date, new DureeEvenement(5), 10);
+        Rappel e1 = new Rappel(new TitreEvenement("A"), alice, date, heure, new DureeEvenement(5), 10);
+        Rappel e2 = new Rappel(new TitreEvenement("A"), alice, date, heure, new DureeEvenement(5), 10);
         assertNotEquals(e1.id(), e2.id());
     }
 
     @Test
     void rappel_dateFinCalculeeCorrectement() {
-        Rappel e = new Rappel(new TitreEvenement("A"), alice, date, new DureeEvenement(15), 10);
-        assertEquals(date.plusMinutes(15), e.dateFin());
+        Rappel e = new Rappel(new TitreEvenement("A"), alice, date, heure, new DureeEvenement(15), 10);
+        assertEquals(dateTime.plusMinutes(15), e.dateFin());
     }
 }

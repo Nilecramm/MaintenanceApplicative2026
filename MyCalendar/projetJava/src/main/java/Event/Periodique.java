@@ -1,7 +1,9 @@
 package Event;
 
+import domain.DateEvenement;
 import domain.DureeEvenement;
 import domain.FrequenceRepetition;
+import domain.HeureDebut;
 import domain.Proprietaire;
 import domain.TitreEvenement;
 
@@ -11,9 +13,9 @@ public class Periodique extends Event {
 
     private final FrequenceRepetition frequence;
 
-    public Periodique(TitreEvenement titre, Proprietaire proprietaire, LocalDateTime dateDebut, DureeEvenement duree,
+    public Periodique(TitreEvenement titre, Proprietaire proprietaire, DateEvenement date, HeureDebut heureDebut, DureeEvenement duree,
                       FrequenceRepetition frequence) {
-        super(titre, proprietaire, dateDebut, duree);
+        super(titre, proprietaire, date, heureDebut, duree);
         this.frequence = frequence;
     }
 
@@ -24,7 +26,7 @@ public class Periodique extends Event {
 
     @Override
     public boolean estDansPeriode(LocalDateTime debut, LocalDateTime fin) {
-        LocalDateTime temp = dateDebut;
+        LocalDateTime temp = dateDebut();
         while (temp.isBefore(fin)) {
             if (!temp.isBefore(debut)) {
                 return true;

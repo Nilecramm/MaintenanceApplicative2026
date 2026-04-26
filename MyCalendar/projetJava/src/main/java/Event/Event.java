@@ -1,7 +1,9 @@
 package Event;
 
+import domain.DateEvenement;
 import domain.DureeEvenement;
 import domain.EventId;
+import domain.HeureDebut;
 import domain.Proprietaire;
 import domain.TitreEvenement;
 
@@ -12,14 +14,16 @@ public abstract class Event {
     private final EventId id;
     protected final TitreEvenement titre;
     protected final Proprietaire proprietaire;
-    protected final LocalDateTime dateDebut;
+    protected final DateEvenement date;
+    protected final HeureDebut heureDebut;
     protected final DureeEvenement duree;
 
-    protected Event(TitreEvenement titre, Proprietaire proprietaire, LocalDateTime dateDebut, DureeEvenement duree) {
+    protected Event(TitreEvenement titre, Proprietaire proprietaire, DateEvenement date, HeureDebut heureDebut, DureeEvenement duree) {
         this.id = new EventId();
         this.titre = titre;
         this.proprietaire = proprietaire;
-        this.dateDebut = dateDebut;
+        this.date = date;
+        this.heureDebut = heureDebut;
         this.duree = duree;
     }
 
@@ -36,7 +40,15 @@ public abstract class Event {
     }
 
     public LocalDateTime dateDebut() {
-        return dateDebut;
+        return LocalDateTime.of(date.value(), heureDebut.value());
+    }
+
+    public final DateEvenement date() {
+        return date;
+    }
+
+    public final HeureDebut heureDebut() {
+        return heureDebut;
     }
 
     public DureeEvenement duree() {
@@ -44,7 +56,7 @@ public abstract class Event {
     }
 
     public LocalDateTime dateFin() {
-        return dateDebut.plusMinutes(duree.value());
+        return dateDebut().plusMinutes(duree.value());
     }
 
     public abstract String description();
