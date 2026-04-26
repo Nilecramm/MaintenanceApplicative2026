@@ -1,5 +1,6 @@
 import Event.Rappel;
 import domain.DureeEvenement;
+import domain.Proprietaire;
 import domain.TitreEvenement;
 import org.junit.jupiter.api.Test;
 
@@ -10,12 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class TestRappel {
 
     private final LocalDateTime date = LocalDateTime.of(2024, 6, 15, 10, 30);
+    private final Proprietaire alice = new Proprietaire("Alice");
 
     @Test
     void description_rappel() {
         Rappel e = new Rappel(
                 new TitreEvenement("Prendre médicaments"),
-                "Alice",
+                alice,
                 date,
                 new DureeEvenement(5),
                 15
@@ -27,7 +29,7 @@ class TestRappel {
     void estDansPeriode_rappelDansLaPeriode() {
         Rappel e = new Rappel(
                 new TitreEvenement("Prendre médicaments"),
-                "Alice",
+                alice,
                 date,
                 new DureeEvenement(5),
                 10
@@ -39,7 +41,7 @@ class TestRappel {
     void estDansPeriode_rappelHorsPeriode() {
         Rappel e = new Rappel(
                 new TitreEvenement("Prendre médicaments"),
-                "Alice",
+                alice,
                 date,
                 new DureeEvenement(5),
                 10
@@ -49,14 +51,14 @@ class TestRappel {
 
     @Test
     void rappel_aUnIdUnique() {
-        Rappel e1 = new Rappel(new TitreEvenement("A"), "Alice", date, new DureeEvenement(5), 10);
-        Rappel e2 = new Rappel(new TitreEvenement("A"), "Alice", date, new DureeEvenement(5), 10);
+        Rappel e1 = new Rappel(new TitreEvenement("A"), alice, date, new DureeEvenement(5), 10);
+        Rappel e2 = new Rappel(new TitreEvenement("A"), alice, date, new DureeEvenement(5), 10);
         assertNotEquals(e1.id(), e2.id());
     }
 
     @Test
     void rappel_dateFinCalculeeCorrectement() {
-        Rappel e = new Rappel(new TitreEvenement("A"), "Alice", date, new DureeEvenement(15), 10);
+        Rappel e = new Rappel(new TitreEvenement("A"), alice, date, new DureeEvenement(15), 10);
         assertEquals(date.plusMinutes(15), e.dateFin());
     }
 }

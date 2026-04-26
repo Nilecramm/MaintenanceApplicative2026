@@ -9,12 +9,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestEvent {
 
     private final LocalDateTime date = LocalDateTime.of(2024, 6, 15, 10, 30);
+    private final Proprietaire alice = new Proprietaire("Alice");
+    private final Proprietaire bob = new Proprietaire("Bob");
+    private final Proprietaire system = new Proprietaire("System");
 
     @Test
     void description_rdvPersonnel() {
         RDVPerso e = new RDVPerso(
                 new TitreEvenement("Médecin"),
-                "Alice",
+                alice,
                 date,
                 new DureeEvenement(30)
         );
@@ -25,7 +28,7 @@ public class TestEvent {
     void description_reunion() {
         Reunion e = new Reunion(
                 new TitreEvenement("Sprint Review"),
-                "Bob",
+                bob,
                 date,
                 new DureeEvenement(60),
                 new LieuEvenement("Salle A"),
@@ -38,7 +41,7 @@ public class TestEvent {
     void description_periodique() {
         Periodique e = new Periodique(
                 new TitreEvenement("Backup"),
-                "System",
+                system,
                 date,
                 new DureeEvenement(15),
                 new FrequenceRepetition(7)
@@ -48,21 +51,21 @@ public class TestEvent {
 
     @Test
     void rdvPerso_idsSontUniques() {
-        RDVPerso e1 = new RDVPerso(new TitreEvenement("A"), "Alice", date, new DureeEvenement(30));
-        RDVPerso e2 = new RDVPerso(new TitreEvenement("A"), "Alice", date, new DureeEvenement(30));
+        RDVPerso e1 = new RDVPerso(new TitreEvenement("A"), alice, date, new DureeEvenement(30));
+        RDVPerso e2 = new RDVPerso(new TitreEvenement("A"), alice, date, new DureeEvenement(30));
         // Chaque event a un id différent
         org.junit.jupiter.api.Assertions.assertNotEquals(e1.id(), e2.id());
     }
 
     @Test
     void estDansPeriode_rdvDansLaPeriode() {
-        RDVPerso e = new RDVPerso(new TitreEvenement("Médecin"), "Alice", date, new DureeEvenement(30));
+        RDVPerso e = new RDVPerso(new TitreEvenement("Médecin"), alice, date, new DureeEvenement(30));
         org.junit.jupiter.api.Assertions.assertTrue(e.estDansPeriode(date.minusHours(1), date.plusHours(1)));
     }
 
     @Test
     void estDansPeriode_rdvHorsPeriode() {
-        RDVPerso e = new RDVPerso(new TitreEvenement("Médecin"), "Alice", date, new DureeEvenement(30));
+        RDVPerso e = new RDVPerso(new TitreEvenement("Médecin"), alice, date, new DureeEvenement(30));
         org.junit.jupiter.api.Assertions.assertFalse(e.estDansPeriode(date.plusDays(1), date.plusDays(2)));
     }
 }

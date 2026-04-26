@@ -1,13 +1,14 @@
 package Event;
 
 import domain.DureeEvenement;
+import domain.Proprietaire;
 import domain.TitreEvenement;
 
 import java.time.LocalDateTime;
 
 public class RDVPerso extends Event {
 
-    public RDVPerso(TitreEvenement titre, String proprietaire, LocalDateTime dateDebut, DureeEvenement duree) {
+    public RDVPerso(TitreEvenement titre, Proprietaire proprietaire, LocalDateTime dateDebut, DureeEvenement duree) {
         super(titre, proprietaire, dateDebut, duree);
     }
 

@@ -2,6 +2,7 @@ package Event;
 
 import domain.DureeEvenement;
 import domain.EventId;
+import domain.Proprietaire;
 import domain.TitreEvenement;
 
 import java.time.LocalDateTime;
@@ -10,11 +11,11 @@ public abstract class Event {
 
     private final EventId id;
     protected final TitreEvenement titre;
-    protected final String proprietaire;
+    protected final Proprietaire proprietaire;
     protected final LocalDateTime dateDebut;
     protected final DureeEvenement duree;
 
-    protected Event(TitreEvenement titre, String proprietaire, LocalDateTime dateDebut, DureeEvenement duree) {
+    protected Event(TitreEvenement titre, Proprietaire proprietaire, LocalDateTime dateDebut, DureeEvenement duree) {
         this.id = new EventId();
         this.titre = titre;
         this.proprietaire = proprietaire;
@@ -30,7 +31,7 @@ public abstract class Event {
         return titre;
     }
 
-    public String proprietaire() {
+    public Proprietaire proprietaire() {
         return proprietaire;
     }
 

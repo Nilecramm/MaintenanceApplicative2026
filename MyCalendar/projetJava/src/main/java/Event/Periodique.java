@@ -2,6 +2,7 @@ package Event;
 
 import domain.DureeEvenement;
 import domain.FrequenceRepetition;
+import domain.Proprietaire;
 import domain.TitreEvenement;
 
 import java.time.LocalDateTime;
@@ -10,7 +11,7 @@ public class Periodique extends Event {
 
     private final FrequenceRepetition frequence;
 
-    public Periodique(TitreEvenement titre, String proprietaire, LocalDateTime dateDebut, DureeEvenement duree,
+    public Periodique(TitreEvenement titre, Proprietaire proprietaire, LocalDateTime dateDebut, DureeEvenement duree,
                       FrequenceRepetition frequence) {
         super(titre, proprietaire, dateDebut, duree);
         this.frequence = frequence;
