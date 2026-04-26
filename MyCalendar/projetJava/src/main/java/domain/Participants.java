@@ -3,6 +3,7 @@ package domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Arrays;
 
 public final class Participants {
@@ -10,10 +11,10 @@ public final class Participants {
     private final List<String> noms;
 
     public Participants(List<String> noms) {
-        if (noms == null || noms.isEmpty()) {
-            throw new IllegalArgumentException("Il doit y avoir au moins un participant");
-        }
-        this.noms = Collections.unmodifiableList(noms);
+        this.noms = Optional.ofNullable(noms)
+                .filter(n -> !n.isEmpty())
+                .map(Collections::unmodifiableList)
+                .orElseThrow(() -> new IllegalArgumentException("Il doit y avoir au moins un participant"));
     }
 
     public Participants(String... noms) {

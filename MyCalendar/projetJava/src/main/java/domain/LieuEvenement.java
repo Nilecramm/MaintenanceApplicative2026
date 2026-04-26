@@ -1,16 +1,16 @@
 package domain;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public final class LieuEvenement {
 
     private final String value;
 
     public LieuEvenement(String value) {
-        if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException("Le lieu ne peut pas être vide");
-        }
-        this.value = value;
+        this.value = Optional.ofNullable(value)
+                .filter(v -> !v.isBlank())
+                .orElseThrow(() -> new IllegalArgumentException("Le lieu ne peut pas être vide"));
     }
 
     public String value() {

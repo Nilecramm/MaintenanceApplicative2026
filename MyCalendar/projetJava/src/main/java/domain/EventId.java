@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 public final class EventId {
@@ -12,10 +13,8 @@ public final class EventId {
     }
 
     public EventId(UUID value) {
-        if (value == null) {
-            throw new IllegalArgumentException("L'identifiant ne peut pas être null");
-        }
-        this.value = value;
+        this.value = Optional.ofNullable(value)
+                .orElseThrow(() -> new IllegalArgumentException("L'identifiant ne peut pas être null"));
     }
 
     public UUID value() {

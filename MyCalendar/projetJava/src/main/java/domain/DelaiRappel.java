@@ -1,16 +1,16 @@
 package domain;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public final class DelaiRappel {
 
     private final int minutes;
 
     public DelaiRappel(int minutes) {
-        if (minutes <= 0) {
-            throw new IllegalArgumentException("Le délai doit être positif");
-        }
-        this.minutes = minutes;
+        this.minutes = Optional.of(minutes)
+                .filter(m -> m > 0)
+                .orElseThrow(() -> new IllegalArgumentException("Le délai doit être positif"));
     }
 
     public int value() {

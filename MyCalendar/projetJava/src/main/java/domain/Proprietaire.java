@@ -1,16 +1,16 @@
 package domain;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public final class Proprietaire {
 
     private final String value;
 
     public Proprietaire(String value) {
-        if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException("Le propriétaire ne peut pas être vide");
-        }
-        this.value = value;
+        this.value = Optional.ofNullable(value)
+                .filter(v -> !v.isBlank())
+                .orElseThrow(() -> new IllegalArgumentException("Le propriétaire ne peut pas être vide"));
     }
 
     public String value() {

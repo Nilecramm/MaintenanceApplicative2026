@@ -2,16 +2,15 @@ package domain;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 
 public final class DateEvenement {
 
     private final LocalDate value;
 
     public DateEvenement(LocalDate value) {
-        if (value == null) {
-            throw new IllegalArgumentException("La date ne peut pas être nulle");
-        }
-        this.value = value;
+        this.value = Optional.ofNullable(value)
+                .orElseThrow(() -> new IllegalArgumentException("La date ne peut pas être nulle"));
     }
 
     public LocalDate value() {

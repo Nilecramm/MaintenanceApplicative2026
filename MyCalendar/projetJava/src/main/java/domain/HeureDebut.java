@@ -2,16 +2,15 @@ package domain;
 
 import java.time.LocalTime;
 import java.util.Objects;
+import java.util.Optional;
 
 public final class HeureDebut {
 
     private final LocalTime value;
 
     public HeureDebut(LocalTime value) {
-        if (value == null) {
-            throw new IllegalArgumentException("L'heure ne peut pas être nulle");
-        }
-        this.value = value;
+        this.value = Optional.ofNullable(value)
+                .orElseThrow(() -> new IllegalArgumentException("L'heure ne peut pas être nulle"));
     }
 
     public LocalTime value() {

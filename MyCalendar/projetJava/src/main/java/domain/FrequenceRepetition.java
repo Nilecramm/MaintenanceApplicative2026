@@ -1,16 +1,16 @@
 package domain;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public final class FrequenceRepetition {
 
     private final int jours;
 
     public FrequenceRepetition(int jours) {
-        if (jours <= 0) {
-            throw new IllegalArgumentException("La fréquence doit être positive");
-        }
-        this.jours = jours;
+        this.jours = Optional.of(jours)
+                .filter(j -> j > 0)
+                .orElseThrow(() -> new IllegalArgumentException("La fréquence doit être positive"));
     }
 
     public int value() {

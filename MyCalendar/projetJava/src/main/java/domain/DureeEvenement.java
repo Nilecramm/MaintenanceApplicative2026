@@ -1,16 +1,16 @@
 package domain;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public final class DureeEvenement {
 
     private final int minutes;
 
     public DureeEvenement(int minutes) {
-        if (minutes < 0) {
-            throw new IllegalArgumentException("La durée ne peut pas être négative");
-        }
-        this.minutes = minutes;
+        this.minutes = Optional.of(minutes)
+                .filter(m -> m >= 0)
+                .orElseThrow(() -> new IllegalArgumentException("La durée ne peut pas être négative"));
     }
 
     public int value() {
