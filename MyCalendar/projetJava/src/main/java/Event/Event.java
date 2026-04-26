@@ -1,30 +1,52 @@
 package Event;
 
+import domain.DureeEvenement;
+import domain.EventId;
+import domain.TitreEvenement;
+
 import java.time.LocalDateTime;
 
-public class Event {
-    public String type; // "RDV_PERSONNEL", "REUNION", "PERIODIQUE"
-    public String title;
-    public String proprietaire;
-    public LocalDateTime dateDebut;
-    public int dureeMinutes;
-    public String lieu; // utilisé seulement pour REUNION
-    public String participants; // séparés par virgules (pour REUNION uniquement)
-    public int frequenceJours; // uniquement pour PERIODIQUE
+public abstract class Event {
 
-    public Event(String type, String title, String proprietaire, LocalDateTime dateDebut, int dureeMinutes,
-                 String lieu, String participants, int frequenceJours) {
-        this.type = type;
-        this.title = title;
+    private final EventId id;
+    protected final TitreEvenement titre;
+    protected final String proprietaire;
+    protected final LocalDateTime dateDebut;
+    protected final DureeEvenement duree;
+
+    protected Event(TitreEvenement titre, String proprietaire, LocalDateTime dateDebut, DureeEvenement duree) {
+        this.id = new EventId();
+        this.titre = titre;
         this.proprietaire = proprietaire;
         this.dateDebut = dateDebut;
-        this.dureeMinutes = dureeMinutes;
-        this.lieu = lieu;
-        this.participants = participants;
-        this.frequenceJours = frequenceJours;
+        this.duree = duree;
     }
 
-    public String description() {
-        return "";
+    public EventId id() {
+        return id;
     }
+
+    public TitreEvenement titre() {
+        return titre;
+    }
+
+    public String proprietaire() {
+        return proprietaire;
+    }
+
+    public LocalDateTime dateDebut() {
+        return dateDebut;
+    }
+
+    public DureeEvenement duree() {
+        return duree;
+    }
+
+    public LocalDateTime dateFin() {
+        return dateDebut.plusMinutes(duree.value());
+    }
+
+    public abstract String description();
+
+    public abstract boolean estDansPeriode(LocalDateTime debut, LocalDateTime fin);
 }
