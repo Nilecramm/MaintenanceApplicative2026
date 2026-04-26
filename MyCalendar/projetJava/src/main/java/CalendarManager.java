@@ -4,6 +4,7 @@ import domain.EventId;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CalendarManager {
 
@@ -18,13 +19,9 @@ public class CalendarManager {
     }
 
     public List<Event> eventsDansPeriode(LocalDateTime debut, LocalDateTime fin) {
-        List<Event> result = new ArrayList<>();
-        for (Event e : events) {
-            if (e.estDansPeriode(debut, fin)) {
-                result.add(e);
-            }
-        }
-        return result;
+        return events.stream()
+                .filter(e -> e.estDansPeriode(debut, fin))
+                .collect(Collectors.toList());
     }
 
     public boolean conflit(Event e1, Event e2) {
