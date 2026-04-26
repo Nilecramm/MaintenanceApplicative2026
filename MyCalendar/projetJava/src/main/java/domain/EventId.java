@@ -24,10 +24,7 @@ public final class EventId {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EventId eventId = (EventId) o;
-        return Objects.equals(value, eventId.value);
+        return o instanceof EventId that && Objects.equals(value, that.value);
     }
 
     @Override

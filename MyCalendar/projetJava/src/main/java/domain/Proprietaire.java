@@ -19,10 +19,7 @@ public final class Proprietaire {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Proprietaire that = (Proprietaire) o;
-        return Objects.equals(value, that.value);
+        return o instanceof Proprietaire that && Objects.equals(value, that.value);
     }
 
     @Override

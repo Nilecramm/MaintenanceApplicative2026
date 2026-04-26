@@ -19,10 +19,7 @@ public final class FrequenceRepetition {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FrequenceRepetition that = (FrequenceRepetition) o;
-        return jours == that.jours;
+        return o instanceof FrequenceRepetition that && jours == that.jours;
     }
 
     @Override

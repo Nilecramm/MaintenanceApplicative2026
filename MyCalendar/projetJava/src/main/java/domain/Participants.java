@@ -30,10 +30,7 @@ public final class Participants {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Participants that = (Participants) o;
-        return Objects.equals(noms, that.noms);
+        return o instanceof Participants that && Objects.equals(noms, that.noms);
     }
 
     @Override

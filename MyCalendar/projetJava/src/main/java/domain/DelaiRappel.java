@@ -19,10 +19,7 @@ public final class DelaiRappel {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DelaiRappel that = (DelaiRappel) o;
-        return minutes == that.minutes;
+        return o instanceof DelaiRappel that && minutes == that.minutes;
     }
 
     @Override

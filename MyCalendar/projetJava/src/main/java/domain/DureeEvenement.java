@@ -19,10 +19,7 @@ public final class DureeEvenement {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DureeEvenement that = (DureeEvenement) o;
-        return minutes == that.minutes;
+        return o instanceof DureeEvenement that && minutes == that.minutes;
     }
 
     @Override

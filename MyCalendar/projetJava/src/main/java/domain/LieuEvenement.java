@@ -19,10 +19,7 @@ public final class LieuEvenement {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LieuEvenement that = (LieuEvenement) o;
-        return Objects.equals(value, that.value);
+        return o instanceof LieuEvenement that && Objects.equals(value, that.value);
     }
 
     @Override

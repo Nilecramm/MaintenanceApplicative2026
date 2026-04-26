@@ -20,10 +20,7 @@ public final class DateEvenement {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DateEvenement that = (DateEvenement) o;
-        return Objects.equals(value, that.value);
+        return o instanceof DateEvenement that && Objects.equals(value, that.value);
     }
 
     @Override
