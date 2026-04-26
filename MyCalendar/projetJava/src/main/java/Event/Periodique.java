@@ -8,6 +8,7 @@ import domain.Proprietaire;
 import domain.TitreEvenement;
 
 import java.time.LocalDateTime;
+import java.util.stream.Stream;
 
 public class Periodique extends Event {
 
@@ -26,13 +27,7 @@ public class Periodique extends Event {
 
     @Override
     public boolean estDansPeriode(LocalDateTime debut, LocalDateTime fin) {
-        LocalDateTime temp = dateDebut();
-        while (temp.isBefore(fin)) {
-            if (!temp.isBefore(debut)) {
-                return true;
-            }
-            temp = temp.plusDays(frequence.value());
-        }
-        return false;
+        return Stream.iterate(dateDebut(), t -> t.isBefore(fin), t -> t.plusDays(frequence.value()))
+                .anyMatch(t -> !t.isBefore(debut));
     }
 }
