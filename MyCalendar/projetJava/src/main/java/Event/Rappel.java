@@ -1,6 +1,7 @@
 package Event;
 
 import domain.DateEvenement;
+import domain.DelaiRappel;
 import domain.DureeEvenement;
 import domain.HeureDebut;
 import domain.Proprietaire;
@@ -10,16 +11,16 @@ import java.time.LocalDateTime;
 
 public class Rappel extends Event {
 
-    private final int minutesAvant;
+    private final DelaiRappel delai;
 
-    public Rappel(TitreEvenement titre, Proprietaire proprietaire, DateEvenement date, HeureDebut heureDebut, DureeEvenement duree, int minutesAvant) {
+    public Rappel(TitreEvenement titre, Proprietaire proprietaire, DateEvenement date, HeureDebut heureDebut, DureeEvenement duree, DelaiRappel delai) {
         super(titre, proprietaire, date, heureDebut, duree);
-        this.minutesAvant = minutesAvant;
+        this.delai = delai;
     }
 
     @Override
     public String description() {
-        return "Rappel : " + titre + " dans " + minutesAvant + " minutes";
+        return "Rappel : " + titre + " dans " + delai + " minutes";
     }
 
     @Override

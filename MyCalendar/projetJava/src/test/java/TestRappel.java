@@ -1,5 +1,6 @@
 import Event.Rappel;
 import domain.DateEvenement;
+import domain.DelaiRappel;
 import domain.DureeEvenement;
 import domain.HeureDebut;
 import domain.Proprietaire;
@@ -27,7 +28,7 @@ class TestRappel {
                 date,
                 heure,
                 new DureeEvenement(5),
-                15
+                new DelaiRappel(15)
         );
         assertEquals("Rappel : Prendre médicaments dans 15 minutes", e.description());
     }
@@ -40,7 +41,7 @@ class TestRappel {
                 date,
                 heure,
                 new DureeEvenement(5),
-                10
+                new DelaiRappel(10)
         );
         assertTrue(e.estDansPeriode(dateTime.minusHours(1), dateTime.plusHours(1)));
     }
@@ -53,21 +54,21 @@ class TestRappel {
                 date,
                 heure,
                 new DureeEvenement(5),
-                10
+                new DelaiRappel(10)
         );
         assertFalse(e.estDansPeriode(dateTime.plusDays(1), dateTime.plusDays(2)));
     }
 
     @Test
     void rappel_aUnIdUnique() {
-        Rappel e1 = new Rappel(new TitreEvenement("A"), alice, date, heure, new DureeEvenement(5), 10);
-        Rappel e2 = new Rappel(new TitreEvenement("A"), alice, date, heure, new DureeEvenement(5), 10);
+        Rappel e1 = new Rappel(new TitreEvenement("A"), alice, date, heure, new DureeEvenement(5), new DelaiRappel(10));
+        Rappel e2 = new Rappel(new TitreEvenement("A"), alice, date, heure, new DureeEvenement(5), new DelaiRappel(10));
         assertNotEquals(e1.id(), e2.id());
     }
 
     @Test
     void rappel_dateFinCalculeeCorrectement() {
-        Rappel e = new Rappel(new TitreEvenement("A"), alice, date, heure, new DureeEvenement(15), 10);
+        Rappel e = new Rappel(new TitreEvenement("A"), alice, date, heure, new DureeEvenement(15), new DelaiRappel(10));
         assertEquals(dateTime.plusMinutes(15), e.dateFin());
     }
 }

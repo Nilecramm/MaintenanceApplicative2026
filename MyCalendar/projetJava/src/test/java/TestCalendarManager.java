@@ -191,7 +191,7 @@ class TestCalendarManager {
                 new FrequenceRepetition(7)
         ));
         manager.ajouterEvent(new Rappel(
-                new TitreEvenement("Médicaments"), alice, date15juin, heure12h, new DureeEvenement(5), 10
+                new TitreEvenement("Médicaments"), alice, date15juin, heure12h, new DureeEvenement(5), new DelaiRappel(10)
         ));
 
         List<Event> result = manager.eventsDansPeriode(base.minusHours(1), base.plusHours(3));
@@ -210,7 +210,7 @@ class TestCalendarManager {
 
     @Test
     void conflit_rappelAvecRDVPerso() {
-        Event rappel = new Rappel(new TitreEvenement("Médicaments"), alice, date15juin, heure10h, new DureeEvenement(5), 10);
+        Event rappel = new Rappel(new TitreEvenement("Médicaments"), alice, date15juin, heure10h, new DureeEvenement(5), new DelaiRappel(10));
         Event rdv = new RDVPerso(new TitreEvenement("Médecin"), alice, date15juin, new HeureDebut(LocalTime.of(10, 2)), new DureeEvenement(30));
         assertTrue(manager.conflit(rappel, rdv));
     }
@@ -218,7 +218,7 @@ class TestCalendarManager {
     @Test
     void afficherEvenements_avecRappelNeLevePasException() {
         manager.ajouterEvent(new Rappel(
-                new TitreEvenement("Médicaments"), alice, date15juin, heure10h, new DureeEvenement(5), 10
+                new TitreEvenement("Médicaments"), alice, date15juin, heure10h, new DureeEvenement(5), new DelaiRappel(10)
         ));
         assertDoesNotThrow(() -> manager.afficherEvenements());
     }
@@ -226,7 +226,7 @@ class TestCalendarManager {
     @Test
     void eventsDansPeriode_rappelDansLaPeriode() {
         manager.ajouterEvent(new Rappel(
-                new TitreEvenement("Médicaments"), alice, date15juin, heure10h, new DureeEvenement(5), 10
+                new TitreEvenement("Médicaments"), alice, date15juin, heure10h, new DureeEvenement(5), new DelaiRappel(10)
         ));
         List<Event> result = manager.eventsDansPeriode(base.minusHours(1), base.plusHours(1));
         assertEquals(1, result.size());
